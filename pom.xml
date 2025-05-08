@@ -101,13 +101,57 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.2</version>
 			</plugin>
-			
+
 			<!-- plugin para generar el java doc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.11.2</version>
 			</plugin>
+
+			<!-- Plugin para ejecutar el JaCoCo (cobertura de los test del
+			proyecto) -->
+			<!--https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.13</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>COMPLEXITY</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.80</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
@@ -120,7 +164,7 @@
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>3.5.3</version>
 			</plugin>
-			
+
 			<!-- plugin para generar el java doc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -128,6 +172,19 @@
 				<version>3.11.2</version>
 			</plugin>
 			
+			<!-- plugin para el reporting de la cobertura de los test (JaCoco) en el Site :D -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
 		</plugins>
 	</reporting>
 
