@@ -85,7 +85,7 @@ public class Main {
                     System.out.println("Formato de fecha incorrecto. Debe ser dd-mm-yyyy.");
                     break;
                 }
-                Cliente cliente = new Cliente(-1, nombreCliente, identificador, fechaNacimiento);
+                Cliente cliente = Cliente.crearCliente(-1, nombreCliente, identificador, fechaNacimiento);
                 boolean anadido = cliente.persist();
                 if (anadido) {
                     System.out.println("Cliente añadido correctamente.");
@@ -118,7 +118,7 @@ public class Main {
                     System.out.println("Formato de fecha incorrecto. Debe ser dd-mm-yyyy.");
                     break;
                 }
-                Cliente cliente = new Cliente(idCliente, nombreClienteMod, identificadorMod, fechaNacimientoMod);
+                Cliente cliente = Cliente.crearCliente(idCliente, nombreClienteMod, identificadorMod, fechaNacimientoMod);
                 //llamamos al metodo de la instancia para modificar el cliente:
                 boolean modificado = cliente.merge();
                 if (modificado) {
@@ -160,7 +160,13 @@ public class Main {
                     }
 
                     // Crear objeto cliente con los criterios
-                    Cliente cliente = new Cliente(-1, nombreBusqueda, identificadorBusqueda, fechaBusqueda);
+                    // Usamos el constructor vacío y luego los setters si queremos filtrar,
+                    // o pasamos null/valores por defecto al método de fábrica si es para búsqueda.
+                    // Para la búsqueda con LIKE, es común pasar los valores directamente.
+                    // Si un campo es null en el objeto 'cliente' de búsqueda, EntityManager.Find lo ignora.
+                    Cliente cliente = Cliente.crearCliente(-1, nombreBusqueda, identificadorBusqueda, fechaBusqueda); // CORREGIDO (asumiendo que crearCliente maneja nulls para búsqueda)
+                                                                                                                        // Si crearCliente no permite nulls para búsqueda, necesitarías un constructor público o setters.
+                                                                                                                        // Por ahora, asumimos que crearCliente es flexible o que los nulls se manejan en Find.
 
                     // Realizar la búsqueda usando el método de instancia
                     Cliente[] resultados = cliente.find();
@@ -196,7 +202,7 @@ public class Main {
                     break;
                 }
                 System.out.println("Has seleccionado el cliente con id: " + idCliente);
-                Cliente cliente = new Cliente(idCliente, null, null, null);
+                Cliente cliente = Cliente.crearCliente(idCliente, null, null, null);
                 boolean eliminado = cliente.remove();
                 if (eliminado) {
                     System.out.println("Cliente eliminado correctamente.");

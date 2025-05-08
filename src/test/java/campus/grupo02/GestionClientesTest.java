@@ -20,8 +20,8 @@ public class GestionClientesTest {
     public void setUp() {
         // Creo una instancia de GestionClientes y dos clientes para usar en los tests inventados por mi
         gestion = new GestionClientes();
-        cliente1 = new Cliente(1, "Bernat Marín", "12345678A", "2006-05-19");
-        cliente2 = new Cliente(2, "Gerard Parareda", "98243553Q", "2006-01-01");
+        cliente1 = Cliente.crearCliente(1, "Bernat Marín", "12345678A", "2006-05-19");
+        cliente2 = Cliente.crearCliente(2, "Gerard Parareda", "98243553Q", "2006-01-01");
     }
     
     @Test
@@ -101,7 +101,8 @@ public class GestionClientesTest {
         gestion.add(cliente1);
         
         // Intentar añadir un cliente con el mismo ID
-        Cliente clienteDuplicado = new Cliente(1, "Otro Nombre", "98765432A", "2000-03-10");
+        // Usar el método crearCliente
+        Cliente clienteDuplicado = Cliente.crearCliente(1, "Bad Bunny", "98765432A", "2000-03-10");
         // Creamos un boolean para poder saber si se ha añadido o no el cliente duplicado
         boolean resultado = gestion.add(clienteDuplicado);
         
@@ -117,7 +118,8 @@ public class GestionClientesTest {
         gestion.add(cliente1);
         
         // Cliente con mismo ID pero datos diferentes
-        Cliente clienteModificado = new Cliente(1, "Bernat Marín Modificado", "12345678A", "2006-05-19");
+        // Usar el método crearCliente
+        Cliente clienteModificado = Cliente.crearCliente(1, "Bernat Marín Modificado", "12345678A", "2006-05-19");
         // Remplazamos el cliente (Bernat Marín) por el cliente modificado (Bernat Marín Modificado)
         // Creamos un boolean para poder saber si se ha añadido o no el cliente duplicado
         boolean resultado = gestion.replace(clienteModificado);
@@ -167,7 +169,8 @@ public class GestionClientesTest {
         gestion.add(cliente1);
         
         // Creamos un objecto cliente que no existe en la lista de gestión
-        Cliente clienteNoExistente = new Cliente(99, "No Existe", "11111111A", "2001-01-01");
+        // Usar el método crearCliente
+        Cliente clienteNoExistente = Cliente.crearCliente(99, "No Existe", "11111111A", "2001-01-01");
         // Generamos un boolean para saber si se ha eliminado o no el cliente
         boolean resultado = gestion.remove(clienteNoExistente);
         
@@ -278,7 +281,8 @@ public class GestionClientesTest {
         // Insertamos los 2 clientes en la lista de gestión
         gestion.add(cliente1); // Bernat Marín
         gestion.add(cliente2); // Gerard Parareda
-        gestion.add(new Cliente(3, "Bernat López", "22222222B", "1995-05-05")); // añadimos un cliente más para hacer más pruebas
+        // Usar el método  crearCliente
+        gestion.add(Cliente.crearCliente(3, "Bernat López", "22222222B", "1995-05-05")); // Añado un cliente más para hacer más pruebas
         
         // Búsqueda que debe encontrar coincidencias
         // Debería encontrar 2 coincidencias: "Bernat Marín" y "Bernat López"

@@ -204,7 +204,7 @@ public class EntityManager {
             if (clientes.getIdentificador() != null) {
                 sqlBuilder.append(" AND identificador LIKE ?");
             }
-            if (clientes.getFecha_nacimiento() != null) {
+            if (clientes.getFechaNacimiento() != null) {
                 sqlBuilder.append(" AND fecha_nacimiento LIKE ?");
             }
 
@@ -218,25 +218,19 @@ public class EntityManager {
             if (clientes.getIdentificador() != null) {
                 ps.setString(paramIndex++, clientes.getIdentificador() + "%");
             }
-            if (clientes.getFecha_nacimiento() != null) {
-                ps.setString(paramIndex++, clientes.getFecha_nacimiento() + "%");
+            if (clientes.getFechaNacimiento() != null) {
+                ps.setString(paramIndex++, clientes.getFechaNacimiento() + "%");
             }
 
             ResultSet rs = ps.executeQuery();
-            Cliente[] result = new Cliente[20];
-            int i = 0;
+            List<Cliente> resultList = new ArrayList<>(); // Uso de arraylist
             while (rs.next()) {
-                if (i < result.length) {
-                    result[i] = new Cliente(rs.getInt("id"),
-                            rs.getString("nombre"),
-                            rs.getString("identificador"),
-                            rs.getString("fecha_nacimiento"));
-                    i++;
-                } else {
-                    break;
-                }
+                resultList.add(Cliente.crearCliente(rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("identificador"),
+                        rs.getString("fecha_nacimiento")));
             }
-            return result;
+            return resultList.toArray(new Cliente[0]);
         } catch (SQLException e) {
             EntityManager.showError(e);
         }
@@ -248,7 +242,7 @@ public class EntityManager {
         try {
             psInsertClientes.setString(1, clientes.getNombre());
             psInsertClientes.setString(2, clientes.getIdentificador());
-            psInsertClientes.setString(3, clientes.getFecha_nacimiento());
+            psInsertClientes.setString(3, clientes.getFechaNacimiento());
             psInsertClientes.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -262,7 +256,7 @@ public class EntityManager {
         try {
             psUpdateTodoClientes.setString(1, clientes.getNombre());
             psUpdateTodoClientes.setString(2, clientes.getIdentificador());
-            psUpdateTodoClientes.setString(3, clientes.getFecha_nacimiento());
+            psUpdateTodoClientes.setString(3, clientes.getFechaNacimiento());
             psUpdateTodoClientes.setInt(4, clientes.getId());
             psUpdateTodoClientes.executeUpdate();
             return true;
@@ -315,7 +309,7 @@ public class EntityManager {
             psInsertTemporada.setString(1, temporada.getNombre());
             psInsertTemporada.setString(2, temporada.getFecha_inicio());
             psInsertTemporada.setString(3, temporada.getFecha_fin());
-            int filasAfectadas = psInsertTemporada.executeUpdate();
+            psInsertTemporada.executeUpdate();
             return true;
         } catch (SQLException e) {
             EntityManager.showError(e);
