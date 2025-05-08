@@ -101,17 +101,34 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.2</version>
 			</plugin>
+			
+			<!-- plugin para generar el java doc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.11.2</version>
+			</plugin>
 		</plugins>
 	</build>
 
+
 	<reporting>
+		<!-- plugin para el reporting de los tests -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>3.5.3</version>
 			</plugin>
+			
+			<!-- plugin para generar el java doc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.11.2</version>
+			</plugin>
+			
 		</plugins>
 	</reporting>
-	
+
 </project>

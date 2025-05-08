@@ -123,11 +123,13 @@ public class Hotel {
     }
 
     /**
-     * Busca aquellos resultados que coinciden con la información que hay en la
-     * instancia.* Para simplificar sólo tendremos en cuenta job_title (con like),
-     * que sea <=maxSalary y >=minSalary. Si job_title es null o min, max salary son
-     * -1, no se tendrán en cuenta.* @return Un array con los Jobs encontrados. Null
-     * si no se ha encontrado nada.
+     * Busca los hoteles que cumplen las condiciones de esta instancia.
+     * Solo se tiene en cuenta {@code job_title} (con <i>LIKE</i>) y que el salario
+     * sea {@literal <=} maxSalary y {@literal >=} minSalary.  
+     * Si {@code job_title} es {@code null} o min/maxSalary valen {@code -1},
+     * esos filtros no se aplican.
+     *
+     * @return un array con los hoteles encontrados, o {@code null} si no hay ninguno
      */
     public Hotel[] find() {
         return EntityManager.Find(this);

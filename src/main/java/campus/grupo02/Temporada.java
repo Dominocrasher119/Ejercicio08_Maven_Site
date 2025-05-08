@@ -244,11 +244,16 @@ public class Temporada {
     }
 
     /**
-     * Busca aquellos resultados que coinciden con la información que hay en la
-     * instancia.* Para simplificar sólo tendremos en cuenta job_title (con like),
-     * que sea <=maxSalary y >=minSalary. Si job_title es null o min, max salary son
-     * -1, no se tendrán en cuenta.* @return Un array con las Temporadas encontradas. Null
-     * si no se ha encontrado nada.
+     * Busca las temporadas que cumplen los criterios indicados en esta instancia.
+     * <p>
+     * Solo se tendrá en cuenta el campo {@code nombre} (con <i>LIKE</i>) y que la
+     * duración esté comprendida entre {@literal <=} {@code maxDays} y
+     * {@literal >=} {@code minDays}.  
+     * Si {@code nombre} es {@code null} o {@code minDays/maxDays} valen {@code -1},
+     * esos filtros se ignorarán.
+     *
+     * @return un array con las temporadas encontradas, o {@code null} si no se halló
+     *         ninguna coincidencia
      */
     //aqui va el select hacia la bbdd:
     public Temporada[] find() {
