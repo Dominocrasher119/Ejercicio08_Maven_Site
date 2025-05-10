@@ -156,14 +156,7 @@ public class Main {
                         default -> System.out.println("Opción de filtro no válida.");
                     }
 
-                    // Crear objeto cliente con los criterios
-                    // Usamos el constructor vacío y luego los setters si queremos filtrar,
-                    // o pasamos null/valores por defecto al método de fábrica si es para búsqueda.
-                    // Para la búsqueda con LIKE, es común pasar los valores directamente.
-                    // Si un campo es null en el objeto 'cliente' de búsqueda, EntityManager.Find lo ignora.
-                    Cliente cliente = Cliente.crearCliente(-1, nombreBusqueda, identificadorBusqueda, fechaBusqueda); // CORREGIDO (asumiendo que crearCliente maneja nulls para búsqueda)
-                                                                                                                        // Si crearCliente no permite nulls para búsqueda, necesitarías un constructor público o setters.
-                                                                                                                        // Por ahora, asumimos que crearCliente es flexible o que los nulls se manejan en Find.
+                    Cliente cliente = Cliente.crearCliente(-1, nombreBusqueda, identificadorBusqueda, fechaBusqueda); 
 
                     // Realizar la búsqueda usando el método de instancia
                     Cliente[] resultados = cliente.find();
@@ -431,7 +424,6 @@ public class Main {
             default -> {
                 System.out.println("Opción no válida para Temporada. Intente de nuevo.");
             }
-
         }
     }
 }
