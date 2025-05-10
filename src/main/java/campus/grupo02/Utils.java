@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Utils {
 
     // Reutilizar un único Scanner para evitar cerrar System.in
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in, "UTF-8");
 
     /**
      * Muestra un menú con título y opciones y retorna la opción seleccionada.

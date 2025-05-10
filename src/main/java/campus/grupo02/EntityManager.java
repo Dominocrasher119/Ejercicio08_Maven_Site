@@ -27,7 +27,6 @@ public class EntityManager {
     private static PreparedStatement psDeleteTemporada;
 
     private static PreparedStatement psInsertHotel;
-    private static PreparedStatement psSeleccionarHotel;
     private static PreparedStatement psUpdatetodoHotel  ;
     private static PreparedStatement psDeleteHotel;
     private static PreparedStatement psSelectIDHotel;
@@ -74,6 +73,8 @@ public class EntityManager {
             // Eliminar Temporada de la BBD:
             String strDeleteTemporada = "DELETE FROM Temporada WHERE id=?";
             psDeleteTemporada = conn.prepareStatement(strDeleteTemporada);
+
+            
             
 
 
@@ -87,7 +88,6 @@ public class EntityManager {
             // update todo hotel
             String strUpdateTodo = "UPDATE Hoteles SET nombre = ?, num_plantas = ?, direccion = ? WHERE id = ?";
             psUpdatetodoHotel = conn.prepareStatement(strUpdateTodo);
-            //update delete hotel
             String strDeleteHotel = "DELETE FROM Hoteles WHERE id = ?";
             psDeleteHotel = conn.prepareStatement(strDeleteHotel);
 
@@ -181,15 +181,6 @@ public class EntityManager {
         } catch (SQLException e) {
             EntityManager.showError(e);
         }
-    }
-
-    // objetos hotel
-    public static void init(Connection conn) throws SQLException {
-        // Preparar los PreparedStatements
-        psInsertHotel = conn.prepareStatement("INSERT INTO Hoteles (nombre, num_plantas, direccion) VALUES (?, ?, ?)");
-        psSeleccionarHotel = conn.prepareStatement("SELECT * FROM Hoteles WHERE id = ?");
-        psUpdatetodoHotel = conn.prepareStatement("UPDATE Hoteles SET nombre = ?, num_plantas = ?, direccion = ? WHERE id = ?");
-        psDeleteHotel = conn.prepareStatement("DELETE FROM Hoteles WHERE id = ?");
     }
 
   
@@ -315,7 +306,7 @@ public class EntityManager {
             psInsertTemporada.setString(1, temporada.getNombre());
             psInsertTemporada.setString(2, temporada.getFecha_inicio());
             psInsertTemporada.setString(3, temporada.getFecha_fin());
-            int filasAfectadas = psInsertTemporada.executeUpdate();
+            psInsertTemporada.executeUpdate();
             return true;
         } catch (SQLException e) {
             EntityManager.showError(e);

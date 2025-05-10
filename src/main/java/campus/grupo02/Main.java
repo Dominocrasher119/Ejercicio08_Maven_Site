@@ -1,11 +1,8 @@
 package campus.grupo02;
 
-import java.util.Scanner;
-
 public class Main {
 
     static int idCliente = 0;
-    static int idHotel = 0;
 
     private static final String[] opcionesPrincipales = {"Clientes", "Hotel", "Temporada"};
     private static final String[] opcionesClientes = {"Alta clientes", "Modificar clientes", "Lista consulta", "Baja clientes"};
@@ -13,7 +10,6 @@ public class Main {
     private static final String[] opcionesTemporada = {"Alta temporada", "Consulta temporada", "Modificar temporada", "Baja temporada"};
 
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
         int opcion = 0;
         System.out.println("Proyecto Cadena Hotelera Grupo 02 Fran, Jaume y Bernat");
 
@@ -157,6 +153,7 @@ public class Main {
                             }
                         }
                         case 4 -> System.out.println("Mostrando todos los clientes");
+                        default -> System.out.println("Opción de filtro no válida.");
                     }
 
                     // Crear objeto cliente con los criterios
@@ -206,6 +203,9 @@ public class Main {
             }
             case 0 -> {
                 System.out.println("Saliendo...");
+            }
+            default -> {
+                System.out.println("Opción no válida para Clientes. Intente de nuevo.");
             }
         }
 
@@ -316,6 +316,9 @@ public class Main {
                 System.out.println("Saliendo...");
 
                 break;
+            default:
+                System.out.println("Opción no válida para Hotel. Intente de nuevo.");
+                break;
 
         }
     }
@@ -418,6 +421,9 @@ public class Main {
             }
             case 0 -> {
                 System.out.println("Saliendo...");
+            }
+            default -> {
+                System.out.println("Opción no válida para Temporada. Intente de nuevo.");
             }
 
         }
